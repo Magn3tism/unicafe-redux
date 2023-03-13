@@ -90,4 +90,44 @@ describe("unicafe reducer", () => {
       bad: 0,
     });
   });
+
+  test("reset state", () => {
+    const action1 = {
+      type: "GOOD",
+    };
+
+    const action2 = {
+      type: "OK",
+    };
+
+    const action3 = {
+      type: "RESET",
+    };
+
+    const state = initialState;
+
+    deepFreeze(state);
+    const goodIncremented = counterReducer(state, action1);
+    expect(goodIncremented).toEqual({
+      good: 1,
+      ok: 0,
+      bad: 0,
+    });
+
+    deepFreeze(goodIncremented);
+    const okIncremented = counterReducer(goodIncremented, action2);
+    expect(okIncremented).toEqual({
+      good: 1,
+      ok: 1,
+      bad: 0,
+    });
+
+    deepFreeze(okIncremented);
+    const resetState = counterReducer(okIncremented, action3);
+    expect(resetState).toEqual({
+      good: 0,
+      ok: 0,
+      bad: 0,
+    });
+  });
 });
