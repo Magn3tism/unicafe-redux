@@ -31,6 +31,13 @@ const App = () => {
         Bad
       </button>{" "}
       <br />
+      <button
+        onClick={() => {
+          store.dispatch({ type: "RESET" });
+        }}
+      >
+        Reset Stats
+      </button>{" "}
       <p>Good: {store.getState().good}</p>
       <p>Ok: {store.getState().ok}</p>
       <p>Bad: {store.getState().bad}</p>
